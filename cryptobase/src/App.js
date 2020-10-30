@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import './App.css';
 
 import { css } from 'linaria';
@@ -26,16 +26,39 @@ const MyButton = styled.button`
 
 function App() {
 
+  const [name, setName] = useState({
+    name: '',
+  });
+
+  console.log(name);
+
+  const handleChanges = event => {
+    setName({ ...name, [event.target.name]: event.target.value});
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    
+  };
+
   
 
   return (
     <div className={appStyle}>
-      <h1>Hello</h1> 
-      <input
-        type='input'
-      />
+      <h1>CRYPTOBASE</h1> 
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          name='name'
+          onChange={handleChanges}
+          value={name.name}
+        />
 
-      <MyButton>Submit</MyButton>
+        <MyButton type='submit'>Submit</MyButton>
+      </form>
+      <h2>{name.name}</h2>
+
     </div>
   );
 }
